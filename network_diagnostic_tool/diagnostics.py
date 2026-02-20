@@ -101,3 +101,17 @@ def ping_host(host):
             return None
     except Exception:
         return None
+
+def ping_host_multiple(host, count=5):
+    """
+    Pings a host multiple times.
+    Returns a list of latencies (in ms).
+    """
+    latencies = []
+    for _ in range(count):
+        latency = ping_host(host)
+        if latency is not None:
+            latencies.append(latency)
+        else:
+            latencies.append(0.0) # 0.0 indicates timeout/failure
+    return latencies
